@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>NW Terminal</title>
+    <link href="../node_modules/jquery.terminal/css/jquery.terminal.min.css" rel="stylesheet"/>
+    <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="../node_modules/jquery.terminal/js/jquery.terminal.min.js"></script>
+    <style>
+      body {
+          margin: 0;
+          padding: 0;
+      }
+
+      .terminal, .cmd, .terminal .terminal-output div div, .cmd .prompt {
+          font-size: 14px;
+          line-height: 18px;
+      }
+    </style>
+    <script>
+      var shell = require('shelljs');
+      var gui = require('nw.gui');
+
+      jQuery(function($, undefined) {
+          $('body').terminal(function(command) {
+              var term = this;
+              if (command !== '') {
+
+                // cd
+                if (command.indexOf('cd')>-1) {
+                  var cd = command.split(' ');
+                  cd.shift();
+                  shell.cd(cd.toString().replace(',',' '));
+                  if (shell.error()) term.echo(shell.error());
+                } else if (command === 'exit') {
+                  gui.App.quit();
+                } else {
+                  shell.config.verbose = true;
+                  shell.exec(command, function(code, err, out) {
+                    if (err) term.echo(err);
+                    else if (out) term.echo(out);
+                  });
+                }
+              } else {
+                 term.echo('');
+              }
+          }, {
+              greetings: 'Welcome,\nwinj!',
+              name: 'nw terminal',
+              prompt: '$ ',
+              exit: false
+          });
+      });
+    </script>
+  </head>
+  <body></body>
+</html>

@@ -1,0 +1,15 @@
+{
+  "name": "nw-terminal",
+  "version": "1.0.0",
+  "description": "A NWJS Terminal emulator based on jquery terminal emulator.",
+  "author": "Edwin Jay Javier",
+  "license": "ISC",
+  "devDependencies": {
+    "nw": "^0.26.6",
+    "nw-builder": "^3.5.1"
+  },
+  "scripts": {
+    "dev": "nw src/",
+    "prod": "nwbuild --platforms linux64 --buildDir dist/ src/"
+  }
+}

@@ -1,0 +1,11 @@
+{
+	"name": "nw-terminal",
+	"version": "1.0.0",
+	"description": "A NWJS Terminal emulator based on jquery terminal emulator.",
+	"license": "ISC",
+	"main": "index.html",
+	"dependencies": {
+		"jquery.terminal": "^1.10.1",
+		"shelljs": "^0.7.8"
+	}
+}
